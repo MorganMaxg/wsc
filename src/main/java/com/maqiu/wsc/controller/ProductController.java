@@ -1,5 +1,6 @@
 package com.maqiu.wsc.controller;
 
+import com.maqiu.wsc.core.entity.Picture;
 import com.maqiu.wsc.core.entity.Product;
 import com.maqiu.wsc.core.entity.ProductDetail;
 import com.maqiu.wsc.core.entity.ShopInfo;
@@ -72,6 +73,9 @@ public class ProductController {
         product1.setListPrice("20.00");
         product1.setOldPrice("70.00");
         productDetail.setProduct(product1);
+
+        Picture picture = new Picture();
+        picture.setPicUrl("http://desk.fd.zol-img.com.cn/g5/M00/0C/04/ChMkJlX7vtOIKeziAAVUmQGqF-MAACwzwGuBuAABVSx961.jpg");
 
         resultData.put("productDetail", productDetail);
         return "productDetail";
