@@ -101,6 +101,6 @@ public class TBOrderDO {
     /**
      * 买家是否已经评价
      */
-    private boolean isBuyerRate;
+    private Boolean isBuyerRate;
 
 }
