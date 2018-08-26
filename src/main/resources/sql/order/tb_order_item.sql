@@ -1,5 +1,5 @@
 -- 订单详情表
-create table tb_order_item {
+create table tb_order_item (
   ID BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'ID',
   PROD_ID VARCHAR(50) NOT NULL DEFAULT '' COMMENT '商品ID',
   ORDER_ID VARCHAR(50) NOT NULL DEFAULT '' COMMENT '订单编号',
@@ -8,4 +8,4 @@ create table tb_order_item {
   PROD_PRICE BIGINT NOT NULL DEFAULT 0 COMMENT '商品单价,单位:分',
   TOTAL_FEE BIGINT NOT NULL DEFAULT 0 COMMENT '商品总金额,单位:分',
   PIC_PATH VARCHAR(400) NOT NULL DEFAULT '' COMMENT '商品图片地址'
-}
+)

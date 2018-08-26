@@ -1,5 +1,5 @@
 -- 订单配送表
-create table tb_order_shipping {
+create table tb_order_shipping (
       SHIPPING_ID BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '配送ID',
       ORDER_ID VARCHAR(50) NOT NULL DEFAULT '' COMMENT '订单号',
       SHIPPINT_CODE VARCHAR(50) NOT NULL DEFAULT '' COMMENT '物流单号',
@@ -13,4 +13,4 @@ create table tb_order_shipping {
       RECEIVER_ZIP VARCHAR(6) NOT NULL DEFAULT '' COMMENT '邮政编码, 如310000',
       CREATE_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
       UPDATE_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间'
-}
+)
