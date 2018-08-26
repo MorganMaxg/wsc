@@ -1,11 +1,9 @@
 package com.maqiu.wsc.controller;
 
+import com.maqiu.wsc.controller.request.OrderCreateRequest;
 import com.maqiu.wsc.controller.response.BaseResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/order")
@@ -22,9 +20,11 @@ public class OrderController {
 
   @ResponseBody
   @PostMapping("/save")
-  public BaseResponse<String> save(){
-
-    return new BaseResponse<>();
+  public BaseResponse<String> save(@RequestBody OrderCreateRequest request){
+    String orderNo = "O" + System.currentTimeMillis();
+    BaseResponse<String> result = new BaseResponse<>();
+    result.setData(orderNo);
+    return result;
   }
 
 }

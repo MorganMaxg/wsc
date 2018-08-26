@@ -33,7 +33,7 @@
     <input type="text" id="buyerNick" placeholder="买家昵称">
     <input type="text" id="address" placeholder="配送地址">
     <input type="text" id="phone" placeholder="买家联系方式">
-
+    <input type="text" id="product" placeholder="prodId_prodNum_prodName_prodPrice"/>
 </div>
 </body>
 </html>
