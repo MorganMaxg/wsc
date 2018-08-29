@@ -1,5 +1,7 @@
 package com.maqiu.wsc.controller.request;
 
+import com.maqiu.wsc.constant.Constant;
+
 import lombok.Data;
 
 @Data
@@ -16,4 +18,6 @@ public class BoxPriceRequest {
   private String prodStyle;
 
   private String material;
+
+  private long userId = Constant.DEFAULT_USER_ID;
 }

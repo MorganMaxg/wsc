@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maqiu.wsc.dal.dao.PriceDao">
+
+    <resultMap id="baseResult" type="com.maqiu.wsc.dal.other.BasePrice">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="prodHash" column="PROD_HASH"/>
+        <result property="singlePrice" column="SINGLE_PRICE"/>
+        <result property="prodStr" column="PROD_STR"/>
+        <result property="status" column="STATUS"/>
+        <result property="createAt" column="CREATE_AT"/>
+    </resultMap>
+
+    <sql id="TABLE_NAME">
+        BASE_PRICE
+    </sql>
+    <sql id="BASE_COL">
+        DICT_ID, USER_ID, DICT_KEY, DICT_NAME, DICT_VALUE, PARENT_DICT_ID, STATUS, CREATE_AT
+    </sql>
+
+    <select id="selectByHASH" resultMap="baseResult">
+        SELECT <include refid="BASE_COL"/> FROM
+        <include refid="TABLE_NAME"/>
+        WHERE USER_ID= #{userId} AND PROD_HASH = #{hash}
+    </select>
+
+</mapper>

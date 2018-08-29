@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maqiu.wsc.dal.dao.DictDao">
+
+    <resultMap id="baseResult" type="com.maqiu.wsc.dal.other.BaseDict">
+        <result property="dictId" column="DICT_ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="dictName" column="DICT_NAME"/>
+        <result property="dictKey" column="DICT_KEY"/>
+        <result property="dictValue" column="DICT_VALUE"/>
+        <result property="parentDictKey" column="PARENT_DICT_KEY"/>
+        <result property="status" column="STATUS"/>
+    </resultMap>
+
+    <sql id="TABLE_NAME">
+        BASE_DICT
+    </sql>
+    <sql id="BASE_COL">
+        DICT_ID, USER_ID, DICT_KEY, DICT_NAME, DICT_VALUE, PARENT_DICT_ID, STATUS, CREATE_AT
+    </sql>
+
+    <select id="selectByParentKey" resultMap="baseResult">
+        SELECT <include refid="BASE_COL"/> FROM
+        <include refid="TABLE_NAME"/>
+        WHERE USER_ID= #{userId} AND PARENT_DICT_KEY = #{dictKey}
+    </select>
+
+</mapper>
