@@ -9,7 +9,7 @@ public class BoxPriceRequest {
 
   private double area;
 
-  private int number;
+  private int number = 1;
 
   private String innerBox;
 
