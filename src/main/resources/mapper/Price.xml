@@ -17,7 +17,7 @@
         BASE_PRICE
     </sql>
     <sql id="BASE_COL">
-        DICT_ID, USER_ID, DICT_KEY, DICT_NAME, DICT_VALUE, PARENT_DICT_ID, STATUS, CREATE_AT
+        ID, USER_ID, PROD_HASH, SINGLE_PRICE, PROD_STR, STATUS, CREATE_AT
     </sql>
 
     <select id="selectByHASH" resultMap="baseResult">

@@ -1,6 +1,7 @@
 package com.maqiu.wsc.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.maqiu.wsc.controller.exception.BaseWSCException;
 import com.maqiu.wsc.controller.request.BoxPriceRequest;
 import com.maqiu.wsc.controller.response.BaseResponse;
 import com.maqiu.wsc.dal.dao.PriceDao;
@@ -39,6 +40,7 @@ public class PriceController {
     BaseResponse<String> priceResponse = new BaseResponse<>();
     long price = singlePrice(request.getUserId(), request.getInnerBox(), request.getOuterBox(), request.getMaterial(), request.getProdStyle());
     double totalPrice = price * request.getNumber() * request.getArea();
+    log.debug("total price:{}", totalPrice);
     priceResponse.setData(MoneyUtil.formatMoney(totalPrice));
     return priceResponse;
   }
@@ -56,7 +58,11 @@ public class PriceController {
     log.info("singlePrice:userId:{}, innserBox:{},outerBox:{},material:{},prodStyle:{}",
              userId, innerBox, outerBox, material, prodStyle);
     String hash = HashUtils.hash(innerBox + outerBox + material + prodStyle);
+    log.info("search hash:{},userId:{}", hash, userId);
     BasePrice price = priceDao.selectByHASH(userId, hash);
+    if (price == null){
+      throw new BaseWSCException("库存数量有变动,该商品库存不足.");
+    }
     log.info("singPrice:price:{}", JSON.toJSON(price));
     return price.getSinglePrice();
   }
