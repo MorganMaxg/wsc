@@ -3,52 +3,154 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>价格查询</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-reboot.css">
+    <script language="JavaScript" src="/static/bootstrap/js/jquery-3.3.1.min.js"></script>
+    <script language="JavaScript" src="/static/bootstrap/js/bootstrap.js"></script>
+    <script language="JavaScript" src="/static/bootstrap/js/bootstrap.bundle.js"></script>
 </head>
 <body>
-<div id="priceDiv">
-    规&nbsp;&nbsp;格&nbsp;&nbsp;<input type="text" name="length" style="width: 40%" placeholder="长度">cm
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="text" name="width" style="widows:40%;" placeholder="宽度">cm
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <br>
-    面&nbsp;&nbsp;积&nbsp;&nbsp;<i name="area" style="color: red"></i>&nbsp;&nbsp;&nbsp;&nbsp;平方厘米
+<div id="priceDiv" class="container">
+    <div id="alertDiv" >
 
-    格子内空&nbsp;&nbsp;<select name="innerBox">
-                <option value="1">3公分到6公分</option>
-                <option value="2">6公分到9公分</option>
-                <option value="3">9公分到12公分</option>
+    </div>
+    <div class="form-group form-row">
+        <div class="col-md-4 mb-2">
+            <label for="validationServer01">长度 单位:厘米</label>
+            <input type="text" name="length" class="form-control area-part" id="lengthInput" placeholder="请输入长度" required>
+        </div>
+        <div class="col-md-4 mb-2">
+            <label for="validationServer01">宽度 单位:厘米</label>
+            <input type="text" name="width" class="form-control area-part" id="widthInput" placeholder="请输入宽度" required>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="areaInput" class="col-sm-2 col-form-label">面积(平方厘米)</label>
+        <div class="col-sm-10">
+            <input type="text" readonly name="area" class="form-control-plaintext" id="areaInput" value="0">
+        </div>
+    </div>
+    <#if inner_box ?? && (inner_box?size > 0)>
+        <div class="form-group">
+            <label for="innerBoxSelect">格子内空</label>
+            <select id="innerBoxSelect" class="form-control" name="innerBox">
+                <#list inner_box as innerItem>
+                    <option value="${innerItem.dictValue}">${innerItem.dictName}</option>
+                </#list>
             </select>
-    <br>
-    外框&nbsp;&nbsp;
-    <select name="outerBox">
-        <option value="1">无</option>
-        <option value="2">4*3</option>
-        <option value="3">5*4</option>
-        <option value="4">6*4</option>
-        <option value="5">8*5</option>
-    </select>
-    <br>
-    款式&nbsp;&nbsp;
-    <select name="prodStyle">
-        <option value="1">常规区</option>
-        <option value="2">异形区</option>
-    </select>
-    <br>
-    材质&nbsp;&nbsp;
-    <select name="material">
-        <option value="1">松木</option>
-        <option value="2">水曲柳</option>
-        <option value="3">菠萝格</option>
-    </select>
-    <br>
-    数&nbsp;&nbsp;量<input type="text" name="number" placeholder="数量">
-    <br>
+        </div>
+    </#if>
+    <#if outer_box ?? && (outer_box?size > 0)>
+        <div class="form-group">
+            <label for="outerBoxSelect">外框</label>
+            <select id="outerBoxSelect" class="form-control" name="outerBox">
+                    <#list outer_box as outerItem>
+                        <option value="${outerItem.dictValue}">${outerItem.dictName}</option>
+                    </#list>
+            </select>
+        </div>
+    </#if>
+    <#if prod_style ?? && (prod_style?size > 0)>
+        <div class="form-group">
+            <label for="prodStyleSelect">款式</label>
+            <select id="prodStyleSelect" class="form-control" name="prodStyle">
+                <#list prod_style as prodStyleItem>
+                    <option value="${prodStyleItem.dictValue}">${prodStyleItem.dictName}</option>
+                </#list>
+            </select>
+        </div>
+    </#if>
+    <#if material ?? && (material?size > 0)>
+        <div class="form-group">
+            <label for="materialSelect">材质</label>
+            <select id="materialSelect" class="form-control" name="material">
+                <#list material as materialItem>
+                    <option value="${materialItem.dictValue}">${materialItem.dictName}</option>
+                </#list>
+            </select>
+        </div>
+    </#if>
+    <div class="form-group row">
+        <label for="numInput" class="col-sm-2 col-form-label">数量</label>
+        <div class="col-sm-10">
+            <input type="number" readonly name="number" class="form-control-plaintext" id="numInput" value="0">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="button" id="totalPriceBtn" class="btn btn-primary">计算总价</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            总价(元)
+        </div>
+        <div class="card-body">
+            <i style="color: red;" id="totalPriceI" class="text-dark"></i>
+        </div>
+    </div>
 </div>
-<div id="priceDiv">
-    总价:<i></i>&nbsp;&nbsp;&nbsp;&nbsp;元
-</div>
-<div>
-    <button type="button">计算总价</button>
-</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        function computeArea(length, width){
+            if (length == null || length == 0 || width == null || width == 0){
+                return;
+            } else {
+                return length * width;
+            }
+        }
+
+        $(".area-part").on('change', function (e) {
+            var width = $("#widthInput").val();
+            var length = $("#widthInput").val();
+            var areaResult = computeArea(length, width);
+            $("#areaInput").val(areaResult);
+        })
+
+        $("#totalPriceBtn").on('click',function (e) {
+            var area = $("#areaInput").val();
+            var number = $("#numInput").val();
+            var innerBox = $("#innerBoxSelect").val();
+            var outerBox = $("#outerBoxSelect").val();
+            var material = $("#materialSelect").val();
+            var prodStyle = $("#prodStyleSelect").val();
+            $.ajax({
+                type:"POST",
+                url:"/price/box",
+                contentType:"application/json;charset=utf-8",
+                data:JSON.stringify({
+                    area:area,
+                    number:number,
+                    innerBox: innerBox,
+                    outerBox: outerBox,
+                    prodStyle: prodStyle,
+                    material: material
+                }),
+                dataType:"json",
+                success:function (response) {
+                    var alertHtml = '';
+                    if (response.code == 200){
+                        alertHtml = '<div class="alert alert-primary" role="alert">'+response.message+'</div>';
+                    } else {
+                        alertHtml = '<div class="alert alert-danger" role="alert">'+response.message+'</div>';
+                    }
+                    $("#alertDiv").html(alertHtml);
+                    $(".alert").alert();
+                },
+                error:function (response) {
+                    $("#alertDiv").html(response.message);
+                    $("#alertDiv").css("alert alert-danger");
+                    $("#alertDiv").alert();
+                }
+            })
+        });
+    })
+</script>
 </body>
 </html>

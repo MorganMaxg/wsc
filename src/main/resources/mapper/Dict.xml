@@ -17,13 +17,37 @@
         BASE_DICT
     </sql>
     <sql id="BASE_COL">
-        DICT_ID, USER_ID, DICT_KEY, DICT_NAME, DICT_VALUE, PARENT_DICT_ID, STATUS, CREATE_AT
+        DICT_ID, USER_ID, DICT_KEY, DICT_NAME, DICT_VALUE, PARENT_DICT_KEY, STATUS, CREATE_AT
     </sql>
 
     <select id="selectByParentKey" resultMap="baseResult">
         SELECT <include refid="BASE_COL"/> FROM
         <include refid="TABLE_NAME"/>
-        WHERE USER_ID= #{userId} AND PARENT_DICT_KEY = #{dictKey}
+        WHERE USER_ID = #{userId} AND PARENT_DICT_KEY = #{key}
     </select>
+
+    <select id="selectByKey" resultMap="baseResult">
+        SELECT <include refid="BASE_COL"/> FROM
+        <include refid="TABLE_NAME"/>
+        WHERE USER_ID = #{userId} AND DICT_KEY = #{key}
+    </select>
+
+    <insert id="save" parameterType="com.maqiu.wsc.dal.other.BaseDict">
+        <selectKey keyColumn="DICT_ID" order="AFTER" keyProperty="dictId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO <include refid="TABLE_NAME"/>
+        (USER_ID, DICT_KEY, DICT_VALUE, DICT_NAME
+        <if test="dict.parentDictId != null">
+            , PARENT_DICT_KEY
+        </if>
+        )
+        VALUE (
+        #{dict.userId}, #{dict.dictKey}, #{dict.dictValue}, #{dict.dictName}
+        <if test="dict.parentDictId != null">
+            , #{dict.parentDictId}
+        </if>
+        )
+    </insert>
 
 </mapper>

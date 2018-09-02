@@ -15,10 +15,8 @@ public class BaseDict {
 
   private String dictKey;
 
-  private long parentDictKey;
+  private String parentDictKey;
 
   private int status;
-
-  private String prodStr;
 
 }

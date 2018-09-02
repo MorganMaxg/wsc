@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication(scanBasePackages = "com.maqiu.wsc")
-@EnableWebMvc
 @MapperScan("com.maqiu.wsc.dal")
 public class WSCWebApplication {
 

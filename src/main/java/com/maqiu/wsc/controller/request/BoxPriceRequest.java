@@ -4,8 +4,10 @@ import com.maqiu.wsc.constant.Constant;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class BoxPriceRequest {
+public class BoxPriceRequest implements Serializable {
 
   private double area;
 
