@@ -40,10 +40,10 @@ public class PriceController {
 
   @GetMapping("/box")
   public String boxPrice(Map<String, Object> res){
-    res.put("outer_box", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "outer_box"));
-    res.put("inner_box", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "inner_box"));
-    res.put("material", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "material"));
-    res.put("prod_style", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "prod_style"));
+    res.put("outer_box", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "OUTER_BOX"));
+    res.put("inner_box", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "INNER_BOX"));
+    res.put("material", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "MATERIAL"));
+    res.put("prod_style", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "PROD_STYLE"));
     return "boxPrice";
   }
 
