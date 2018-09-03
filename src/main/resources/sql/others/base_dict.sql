@@ -1,5 +1,5 @@
 -- 字典表
-create table base_dict (
+create table BASE_DICT (
   DICT_ID bigint primary key auto_increment COMMENT 'ID',
   USER_ID bigint NOT NULL DEFAULT 0 COMMENT '商户号',
   DICT_KEY VARCHAR (40) DEFAULT '' COMMENT '字典KEY',

@@ -3,6 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>价格查询</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-grid.css">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-reboot.css">
@@ -15,6 +17,7 @@
     <div id="alertDiv" >
 
     </div>
+    <h3>花格价格</h3>
     <div class="form-group form-row">
         <div class="col-md-4 mb-2">
             <label for="validationServer01">长度 单位:厘米</label>
@@ -75,7 +78,7 @@
     <div class="form-group row">
         <label for="numInput" class="col-sm-2 col-form-label">数量</label>
         <div class="col-sm-10">
-            <input type="number" readonly name="number" class="form-control-plaintext" id="numInput" value="0">
+            <input type="number" name="number" class="form-control-plaintext" id="numInput" value="0">
         </div>
     </div>
     <div class="form-group row">

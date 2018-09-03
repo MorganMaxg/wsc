@@ -1,5 +1,5 @@
 -- 计量属性表
-create table base_price (
+create table BASE_PRICE (
   ID bigint primary key auto_increment COMMENT 'ID',
   PROD_HASH VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品属性HASH',
   SINGLE_PRICE INT(20) NOT NULL DEFAULT 0 COMMENT '产品单价',
