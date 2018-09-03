@@ -78,7 +78,7 @@
     <div class="form-group row">
         <label for="numInput" class="col-sm-2 col-form-label">数量</label>
         <div class="col-sm-10">
-            <input type="number" name="number" class="form-control-plaintext" id="numInput" value="0">
+            <input type="number" name="number" class="form-control" id="numInput" value="1">
         </div>
     </div>
     <div class="form-group row">
