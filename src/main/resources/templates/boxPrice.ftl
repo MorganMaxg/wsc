@@ -111,7 +111,7 @@
 
         $(".area-part").on('change', function (e) {
             var width = $("#widthInput").val();
-            var length = $("#widthInput").val();
+            var length = $("#lengthInput").val();
             var areaResult = computeArea(length, width);
             $("#areaInput").val(areaResult);
         })
