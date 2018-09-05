@@ -5,12 +5,12 @@
     <title>价格查询</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
 
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-grid.css">
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-reboot.css">
-    <script language="JavaScript" src="/static/bootstrap/js/jquery-3.3.1.min.js"></script>
-    <script language="JavaScript" src="/static/bootstrap/js/bootstrap.js"></script>
-    <script language="JavaScript" src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-reboot.css">
+    <script language="JavaScript" src="/bootstrap/js/jquery-3.3.1.min.js"></script>
+    <script language="JavaScript" src="/bootstrap/js/bootstrap.js"></script>
+    <script language="JavaScript" src="/bootstrap/js/bootstrap.bundle.js"></script>
 </head>
 <body>
 <div id="priceDiv" class="container">
