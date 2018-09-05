@@ -23,11 +23,6 @@ public class DictController {
 
     @RequestMapping("/add")
     public String add(Map<String, Object> response){
-        response.put("outer_box", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "outer_box"));
-        response.put("inner_box", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "inner_box"));
-        response.put("material", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "material"));
-        response.put("prod_style", dictDao.selectByParentKey(Constant.DEFAULT_USER_ID, "prod_style"));
-
         return "dictAdd";
     }
 
@@ -44,11 +39,11 @@ public class DictController {
 
     private void convertDictSaveRequest2DO(DictSaveRequest request, BaseDict dictDO){
         if (request != null && dictDO != null){
-            String hash = HashUtils.hash(dictDO.getDictName());
-            dictDO.setDictKey(hash);
+            dictDO.setDictKey(request.getDictKey());
             dictDO.setDictName(request.getDictName());
-            dictDO.setDictValue(hash);
+            dictDO.setDictValue(request.getDictKey());
             dictDO.setUserId(request.getUserNo());
+            dictDO.setParentDictKey(request.getParentKey());
         }
     }
 }
