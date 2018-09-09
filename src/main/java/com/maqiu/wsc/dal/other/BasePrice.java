@@ -1,11 +1,12 @@
 package com.maqiu.wsc.dal.other;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class BasePrice {
+public class BasePrice implements Serializable {
 
   private long id;
 

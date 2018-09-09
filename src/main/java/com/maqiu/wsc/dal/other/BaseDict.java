@@ -2,8 +2,10 @@ package com.maqiu.wsc.dal.other;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class BaseDict {
+public class BaseDict implements Serializable {
 
   private long dictId;
 

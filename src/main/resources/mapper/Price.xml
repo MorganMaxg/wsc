@@ -26,4 +26,11 @@
         WHERE USER_ID= #{userId} AND PROD_HASH = #{hash}
     </select>
 
+    <insert id="savePrice">
+        INSERT INTO <include refid="TABLE_NAME"/>
+        (USER_ID, PROD_HASH, SINGLE_PRICE, CREATE_AT)
+        VALUE
+        (#{userId}, #{hash}, #{price}, NOW())
+    </insert>
+
 </mapper>

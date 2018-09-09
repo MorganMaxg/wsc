@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Param;
 public interface PriceDao {
 
   BasePrice selectByHASH(@Param("userId") long userId,@Param("hash") String hash);
+
+  int savePrice(@Param("userId") long userId, @Param("hash") String hash, @Param("price") long price);
 }

@@ -7,11 +7,11 @@ import com.maqiu.wsc.dal.dao.DictDao;
 import com.maqiu.wsc.dal.other.BaseDict;
 import com.maqiu.wsc.util.HashUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -34,6 +34,19 @@ public class DictController {
         convertDictSaveRequest2DO(request, dictDO);
         dictDao.save(dictDO);
         response.setData(dictDO.getDictId());
+        return response;
+    }
+
+    @ResponseBody
+    @GetMapping("/all/{userId}")
+    public BaseResponse<Map<String, List<BaseDict>>> all(@PathVariable Long userId){
+        Map<String, List<BaseDict>> result = new HashMap<>();
+        result.put("INNER_BOX", dictDao.selectByParentKey(userId, "INNER_BOX"));
+        result.put("OUTER_BOX", dictDao.selectByParentKey(userId, "OUTER_BOX"));
+        result.put("MATERIAL", dictDao.selectByParentKey(userId, "MATERIAL"));
+        result.put("PROD_STYLE", dictDao.selectByParentKey(userId, "PROD_STYLE"));
+        BaseResponse<Map<String, List<BaseDict>>> response = new BaseResponse<>();
+        response.setData(result);
         return response;
     }
 

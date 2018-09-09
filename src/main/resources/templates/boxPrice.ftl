@@ -14,9 +14,6 @@
 </head>
 <body>
 <div id="priceDiv" class="container">
-    <div id="alertDiv" >
-
-    </div>
     <h3>花格价格</h3>
     <div class="form-group form-row">
         <div class="col-md-4 mb-2">
@@ -89,6 +86,9 @@
     <div class="card">
         <div class="card-header">
             总价(元)
+            <div id="alertDiv" >
+
+            </div>
         </div>
         <div class="card-body">
             <i style="color: red;" id="totalPriceI" class="text-dark"></i>
