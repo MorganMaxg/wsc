@@ -12,3 +12,4 @@
     <a href="regist">注册</a>
 </form>
 </body>
+</html>
