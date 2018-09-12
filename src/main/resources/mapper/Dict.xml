@@ -33,19 +33,19 @@
     </select>
 
     <insert id="save" parameterType="com.maqiu.wsc.dal.other.BaseDict">
-        <selectKey keyColumn="DICT_ID" order="AFTER" keyProperty="dictId">
+        <selectKey keyColumn="DICT_ID" order="AFTER" keyProperty="dictId" resultType="long">
             SELECT LAST_INSERT_ID()
         </selectKey>
         INSERT INTO <include refid="TABLE_NAME"/>
         (USER_ID, DICT_KEY, DICT_VALUE, DICT_NAME
-        <if test="dict.parentDictId != null">
+        <if test="parentDictKey != null">
             , PARENT_DICT_KEY
         </if>
         )
         VALUE (
-        #{dict.userId}, #{dict.dictKey}, #{dict.dictValue}, #{dict.dictName}
-        <if test="dict.parentDictId != null">
-            , #{dict.parentDictId}
+        #{userId}, #{dictKey}, #{dictValue}, #{dictName}
+        <if test="parentDictKey != null">
+            , #{parentDictKey}
         </if>
         )
     </insert>
