@@ -1,5 +1,5 @@
 -- 产品SKU表
-create table prod_sku (
+create table PROD_SKU (
   SKU_ID        BIGINT PRIMARY KEY                                     AUTO_INCREMENT
   COMMENT 'SKU_ID',
   PROD_ID       VARCHAR(50)   NOT NULL DEFAULT '' COMMENT '产品编号',

@@ -1,5 +1,5 @@
 -- 订单表
-create table tb_order (
+create table TB_ORDER (
   ORDER_ID      VARCHAR(50)  NOT NULL PRIMARY KEY
   COMMENT '订单ID',
   ORDER_PRICE   BIGINT       NOT NULL DEFAULT 0

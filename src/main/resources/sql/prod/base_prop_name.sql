@@ -1,5 +1,5 @@
 -- 基本属性表
-create table base_prop_name(
+create table BASE_PROP_NAME(
   prop_name_id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '属性名ID',
   prop_name VARCHAR(40) NOT NULL DEFAULT '' COMMENT '属性值名称',
   category_id BIGINT NOT NULL DEFAULT 0 COMMENT '所属类目ID',
