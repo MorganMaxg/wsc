@@ -107,6 +107,8 @@ public class PriceController {
      */
   private String genHashStr(long userId, String innerBox, String outerBox, String material, String prodStyle){
       List<String> hashList = new ArrayList<>();
+      log.info("GEN HASH PARAMS:userId={},innerBox={},outerBox={},material={},prodStyle={}",
+               userId, innerBox, outerBox, material, prodStyle);
       if (userId != 0){
           hashList.add("USER_id" + userId);
       }
@@ -122,7 +124,9 @@ public class PriceController {
       if (StringUtils.isNotBlank(prodStyle)){
           hashList.add("PROD_STYLE" + prodStyle);
       }
-      return HashUtils.hashStr(hashList);
+      String hash = HashUtils.hashStr(hashList);
+      log.info("GEN HASH RESULT={}", hash);
+      return hash;
   }
 
 

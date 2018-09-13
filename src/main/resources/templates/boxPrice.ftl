@@ -139,7 +139,7 @@
                 success:function (response) {
                     var alertHtml = '';
                     if (response.code == 200){
-                        alertHtml = '<div class="alert alert-primary" role="alert">'+response.message+'</div>';
+                        alertHtml = '<div class="alert alert-primary" role="alert">'+response.data+'</div>';
                     } else {
                         alertHtml = '<div class="alert alert-danger" role="alert">'+response.message+'</div>';
                     }
