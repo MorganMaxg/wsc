@@ -1,6 +1,6 @@
 package com.maqiu.wsc.util;
 
-import org.apache.commons.lang3.StringUtils;
+import java.math.BigDecimal;
 
 public class MoneyUtil {
 
@@ -10,20 +10,20 @@ public class MoneyUtil {
    * @return
    */
   public static String formatMoney(double price){
-    String result = null;
-    String priceStr = StringUtils.split(String.valueOf(price), ".")[0];//去除小数
-    if (priceStr.length() > 2){
-      result = priceStr.substring(0, priceStr.length() -2) + "." + priceStr.substring(priceStr.length() -2);
-    } else {
-      if (priceStr.length() == 2){
-        result = "0." + priceStr;
-      }
-      if (priceStr.length() == 1){
-        result = "0.0" + priceStr;
-      }
-
+    if (price < 1) {
+      return "0.00";
     }
-    return result;
+    if (price >=1 && price < 10){
+      return "0.0" + (long) price;
+    }
+    if (price >= 10 && price < 100){
+      return "0." + (long) price;
+    }
+    if (price >= 100) {
+      long realPrice = (long) price;
+      return (new BigDecimal(realPrice)).divide(new BigDecimal(100), 2, 6).toPlainString();
+    }
+    return "0.00";
   }
 
 }
