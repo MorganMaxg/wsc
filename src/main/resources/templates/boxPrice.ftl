@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="areaInput" class="col-sm-2 col-form-label">面积(平方厘米)</label>
+        <label for="areaInput" class="col-sm-2 col-form-label">面积(平方米)</label>
         <div class="col-sm-10">
             <input type="text" readonly name="area" class="form-control-plaintext" id="areaInput" value="0">
         </div>
@@ -105,7 +105,7 @@
             if (length == null || length == 0 || width == null || width == 0){
                 return;
             } else {
-                return length * width;
+                return length * width / 10000;
             }
         }
 
