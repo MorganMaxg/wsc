@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maqiu.wsc.dal.dao.UserDAO">
+
+    <resultMap id="baseResult" type="com.maqiu.wsc.dal.other.BaseUser">
+        <result property="userId" column="USER_ID"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="userPwd" column="USER_PASSWORD"/>
+        <result property="status" column="STATUS"/>
+        <result property="createdAt" column="CREATE_AT"/>
+    </resultMap>
+
+    <sql id="TABLE_NAME">
+        BASE_USER
+    </sql>
+    <sql id="BASE_COL">
+        USER_ID, USER_NAME, USER_PASSWORD, STATUS, CREATE_AT
+    </sql>
+
+    <select id="selectByName" resultMap="baseResult">
+--         参考Dict.xml中的selectByParentKey写SQL
+    </select>
+
+    <insert id="save" parameterType="com.maqiu.wsc.dal.other.BaseUser">
+--         参考Price.xml中的savePrice写SQL
+    </insert>
+
+</mapper>
