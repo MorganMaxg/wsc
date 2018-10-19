@@ -20,6 +20,9 @@
 
     <select id="selectByName" resultMap="baseResult">
 --         参考Dict.xml中的selectByParentKey写SQL
+            SELECT <include refid="BASE_COL"/>FROM
+        <include refid="TABLE_NAME"/>
+        WHERE USER_ID= #{userId} AND PARENT_DICT_KEY = #{key}
     </select>
 
     <insert id="save" parameterType="com.maqiu.wsc.dal.other.BaseUser">

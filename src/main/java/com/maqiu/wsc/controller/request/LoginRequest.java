@@ -11,7 +11,6 @@ import lombok.Data;
  * @author maxiaogang
  * @date 2018/10/15 15:28
  */
-@Data
 public class LoginRequest {
 
     /**
@@ -23,4 +22,20 @@ public class LoginRequest {
      * 密码
      */
     private String pwd;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
 }

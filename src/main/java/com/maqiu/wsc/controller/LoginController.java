@@ -6,6 +6,7 @@ package com.maqiu.wsc.controller;
 
 import javax.annotation.Resource;
 
+import com.maqiu.wsc.dal.other.BaseUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,16 +51,25 @@ public class LoginController {
         BaseResponse<String> response = new BaseResponse<>();
         // TODO: 2018/10/15 实现实现登录功能
         // TODO: 2018/10/15 第一步:检查request中用户名和密码是否为空,建议使用StringUtils.isBlank()判断字符串是否为空
-        // request.getUserName()可以获取用户名
+        //request.getUserName()可以获取用户名
+        if(StringUtils.isBlank(request.getUserName())||StringUtils.isBlank(request.getPwd())){
+            System.out.println("用户名和密码错误");
+        }
+
         // TODO: 2018/10/15 如果用户米和密码为空,则返回用户名和密码错误
         // response.setMessage("用户名和密码错误");可以返回用户名和密码错误
         // TODO: 2018/10/15 第二步:根据用户名从数据库中查询用户信息
         // TODO: 注意::需要先编辑User.xml中selectByName方法中的SQL
         // BaseUser user = userDAO.selectByName(request.getUserName());可以获取用户信息,
+        BaseUser user = userDAO.selectByName(request.getUserName());
+              if(!StringUtils.equalsIgnoreCase(user.getUserName(),request.getUserName()) || !StringUtils.equalsIgnoreCase(user.getUserPwd(),(request.getPwd()))){
+            System.out.println("用户名和密码错误");
+        }
+
         // TODO: 2018/10/15 第三步:如果查不到用户信息或者用户输入的密码和数据库中的密码不一致,则返回"用户名和密码错误"
         // request.getPwd()可以获得用户输入的密码user.getUserPwd()可以获得数据库中的密码
         // StringUtils.equalsIgnoreCase("字符串1", "字符串2")可以判断俩个字符串是否相等
         return response;
-    }
+                }
 
-}
+                }
