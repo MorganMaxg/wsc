@@ -27,6 +27,10 @@
 
     <insert id="save" parameterType="com.maqiu.wsc.dal.other.BaseUser">
 --         参考Price.xml中的savePrice写SQL
+        INSERT INTO <include refid="TABLE_NAME"/>
+        (USER_ID, PROD_HASH, SINGLE_PRICE, CREATE_AT)
+        VALUE
+        (#{userId}, #{hash}, #{price}, NOW())
     </insert>
 
 </mapper>
