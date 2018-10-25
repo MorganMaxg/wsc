@@ -9,10 +9,7 @@ import javax.annotation.Resource;
 import com.maqiu.wsc.dal.other.BaseUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.maqiu.wsc.controller.request.LoginRequest;
 import com.maqiu.wsc.controller.response.BaseResponse;
@@ -30,30 +27,31 @@ public class LoginController {
 
     @Resource
     UserDAO userDAO;
-
     /**
      * http://localhost:80/login/index
      * 跳转到登录页面
      * @return
      */
     @GetMapping("/index")
+
     public String index(){
         return "login";
     }
 
     /**
      * 进行登录操作
-     * @param request
+     * @param  request
      * @return
      */
-    @PostMapping("/action")
-    public BaseResponse<String> login(@RequestBody LoginRequest request){
+    @PostMapping( value = "/action")
+    @ResponseBody
+    public BaseResponse<String> login( LoginRequest request){
+
         BaseResponse<String> response = new BaseResponse<>();
-        // TODO: 2018/10/15 实现实现登录功能
-        // TODO: 2018/10/15 第一步:检查request中用户名和密码是否为空,建议使用StringUtils.isBlank()判断字符串是否为空
-        //request.getUserName()可以获取用户名
+
+
         if(StringUtils.isBlank(request.getUserName())||StringUtils.isBlank(request.getPwd())){
-            System.out.println("用户名和密码错误");
+            response.setMessage("用户名和密码错误");
         }
 
         // TODO: 2018/10/15 如果用户米和密码为空,则返回用户名和密码错误
@@ -63,7 +61,7 @@ public class LoginController {
         // BaseUser user = userDAO.selectByName(request.getUserName());可以获取用户信息,
         BaseUser user = userDAO.selectByName(request.getUserName());
               if(!StringUtils.equalsIgnoreCase(user.getUserName(),request.getUserName()) || !StringUtils.equalsIgnoreCase(user.getUserPwd(),(request.getPwd()))){
-            System.out.println("用户名和密码错误");
+                  response.setMessage("用户名和密码错误");
         }
 
         // TODO: 2018/10/15 第三步:如果查不到用户信息或者用户输入的密码和数据库中的密码不一致,则返回"用户名和密码错误"
