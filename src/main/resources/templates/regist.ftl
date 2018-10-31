@@ -5,6 +5,13 @@
     <title>用户注册</title>
 </head>
 <body>
-请在regist.ftl页面完成用户注册功能.可参考login.ftl
+用户注册页面
+
+<form action="/user/regist/action" method="post">
+    用户名：<input type="text" name="userName"/><br/>
+    手机号:<input type="text" name="userPhone"/><br/>
+    密码：<input type="password" name="pwd"/>
+
+    <button>注册</button>
 </body>
 </html>
