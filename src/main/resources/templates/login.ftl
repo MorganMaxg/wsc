@@ -10,7 +10,7 @@
 <form action="/user/login/action" method="post">
     <div class="form-group form-row">
         <div class="col-md-4 mb-2">
-            <label>用户名：</label>
+            <label>用户名：1</label>
             <input type="text" name="userName" class="form-control" id="userName" placeholder="请输入用户名" required />
         </div>
     </div>
