@@ -21,10 +21,10 @@
     </sql>
 
     <select id="selectByParentKey" resultMap="baseResult">
-        SELECT <include refid="BASE_COL"/> FROM
-        <include refid="TABLE_NAME"/>
-        WHERE USER_ID = #{userId} AND PARENT_DICT_KEY = #{key}
-    </select>
+    SELECT <include refid="BASE_COL"/> FROM
+    <include refid="TABLE_NAME"/>
+    WHERE USER_ID = #{userId} AND PARENT_DICT_KEY = #{key}
+</select>
 
     <select id="selectByKey" resultMap="baseResult">
         SELECT <include refid="BASE_COL"/> FROM

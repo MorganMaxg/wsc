@@ -6,6 +6,7 @@
     <resultMap id="baseResult" type="com.maqiu.wsc.dal.other.BaseUser">
         <result property="userId" column="USER_ID"/>
         <result property="userName" column="USER_NAME"/>
+        <result property="userPhone" column="USER_PHONE"/>
         <result property="userPwd" column="USER_PASSWORD"/>
         <result property="status" column="STATUS"/>
         <result property="createdAt" column="CREATE_AT"/>
@@ -15,22 +16,21 @@
         BASE_USER
     </sql>
     <sql id="BASE_COL">
-        USER_ID, USER_NAME, USER_PASSWORD, STATUS, CREATE_AT
+        USER_ID, USER_NAME, USER_PASSWORD, USER_PHONE, STATUS, STATUS
     </sql>
 
-    <select id="selectByName" resultMap="baseResult">
+    <select id = "selectByName" resultMap = "baseResult">
 --         参考Dict.xml中的selectByParentKey写SQL
-            SELECT <include refid="BASE_COL"/>FROM
-        <include refid="TABLE_NAME"/>
-        WHERE USER_ID= #{userId} AND PARENT_DICT_KEY = #{key}
+            SELECT <include refid = "BASE_COL"/>FROM
+        <include refid = "TABLE_NAME"/>
+        WHERE USER_NAME = #{userName}
     </select>
-
     <insert id="save" parameterType="com.maqiu.wsc.dal.other.BaseUser">
 --         参考Price.xml中的savePrice写SQL
         INSERT INTO <include refid="TABLE_NAME"/>
-        (USER_ID, PROD_HASH, SINGLE_PRICE, CREATE_AT)
+        ( USER_NAME, USER_PASSWORD, USER_PHONE)
         VALUE
-        (#{userId}, #{hash}, #{price}, NOW())
+        (#{userName},#{userPwd},#{userPhone})
     </insert>
 
 </mapper>
