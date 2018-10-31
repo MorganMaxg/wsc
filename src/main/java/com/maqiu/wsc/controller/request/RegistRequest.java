@@ -17,4 +17,6 @@ public class RegistRequest {
     private String userName;
 
     private String pwd;
+
+    private String userPhone;//变量名首字母小写,类名首字母大写
 }

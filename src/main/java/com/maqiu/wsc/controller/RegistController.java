@@ -8,9 +8,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.maqiu.wsc.controller.request.RegistRequest;
 import com.maqiu.wsc.controller.response.BaseResponse;
@@ -46,12 +44,18 @@ public class RegistController {
      * @return
      */
     @PostMapping("/action")
+    @ResponseBody
     public BaseResponse<String> regist(RegistRequest request){
         BaseResponse<String> response = new BaseResponse<>();
         // TODO: 2018/10/15 实现注册功能
         // TODO: 2018/10/15 第一步:校验用户输入的用户名和密码是否为空
-        if(StringUtils.isBlank(request.getUserName())||StringUtils.isBlank(request.getPwd())){
-            System.out.println("用户名和密码错误");
+        if(StringUtils.isBlank(request.getUserName())||StringUtils.isBlank(request.getPwd())||StringUtils.isBlank(request.getUserPhone())){
+
+            response.setMessage("用户名或密码错误");
+        }
+        if(StringUtils.isBlank(request.getUserPhone())){
+
+            response.setMessage("电话号码错误");
         }
         // TODO: 2018/10/15 如果为空则返回"用户和密码填写错误"
         // TODO: 2018/10/15 第二步:如果不为空,则将用户request转化为BaseUser
@@ -59,6 +63,7 @@ public class RegistController {
         BaseUser user = new BaseUser();
         user.setUserName(request.getUserName());
         user.setUserPwd(request.getPwd());
+        user.setUserPhone(request.getUserPhone());
         // user.setUserName(request.getUserName());可以将request中的userName属性的值赋值给user对象
         // TODO: 2018/10/15 第三步:将用户信息保存到数据库
         // TODO: 2018/10/15 注意:补充User.xml中的save的 SQL

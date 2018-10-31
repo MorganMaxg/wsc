@@ -30,6 +30,8 @@ public class BaseUser implements Serializable{
     /**
      * 用户密码
      */
+    private String userPhone;
+
     private String userPwd;
 
     /**
@@ -41,5 +43,8 @@ public class BaseUser implements Serializable{
      * 用户创建时间
      */
     private Date createdAt;
+
+
+
 
 }
