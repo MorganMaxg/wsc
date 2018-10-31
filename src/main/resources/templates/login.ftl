@@ -3,14 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>login</title>
-<#import "head.ftl"as headFile/>
+<#include "head.ftl"/>
 </head>
 <body>
 <div class="container">
-<form action="/user/login/action" method="post">
+    <div id="loginTip" class="form-group form-row"></div>
     <div class="form-group form-row">
         <div class="col-md-4 mb-2">
-            <label>用户名：1</label>
+            <label>用户名：</label>
             <input type="text" name="userName" class="form-control" id="userName" placeholder="请输入用户名" required />
         </div>
     </div>
@@ -22,14 +22,38 @@
     </div>
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" id="login" class="btn btn-primary">登录</button>
+            <button type="button" id="loginBtn" class="btn btn-primary">登录</button>
             <a href="/user/regist/index">注册</a>
         </div>
     </div>
-</form>
     <script>
         $(document).ready(function () {
-
+            //监听了id是loginBtn的元素的点击(cilck)事件;
+            //用ajax的话就不需要form表单了
+            $("#loginBtn").on("click", function(e){
+                //alert("点击了登录按钮");//弹出一个框
+                //我们看一下效果,看看点击事件有没有生效
+                var userName = $("#userName").val();
+                var userPwd = $("#password").val();
+                $.ajax({
+                    type:"POST",
+                    url:"/user/login/action",
+                    contentType:"application/json;charset=utf-8",
+                    data:JSON.stringify({
+                        userName:userName,
+                        pwd:userPwd
+                    }),
+                    dataType:"json",
+                    success:function (response) {
+                        //alert(response.message);
+                       //alert("ajax请求成功了");
+                        $("#loginTip").html(response.message)
+                    },
+                    error:function (response) {
+                        alert("ajax请求出错");
+                    }
+                })
+            });
         })
     </script>
 </div>

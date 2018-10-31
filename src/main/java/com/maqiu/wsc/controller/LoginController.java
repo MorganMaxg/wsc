@@ -60,7 +60,8 @@ public class LoginController {
         // TODO: 注意::需要先编辑User.xml中selectByName方法中的SQL
         // BaseUser user = userDAO.selectByName(request.getUserName());可以获取用户信息,
         BaseUser user = userDAO.selectByName(request.getUserName());
-              if(!StringUtils.equalsIgnoreCase(user.getUserName(),request.getUserName()) || !StringUtils.equalsIgnoreCase(user.getUserPwd(),(request.getPwd()))){
+
+              if(user == null|| !StringUtils.equalsIgnoreCase(user.getUserName(),request.getUserName()) || !StringUtils.equalsIgnoreCase(user.getUserPwd(),(request.getPwd()))){
                   response.setMessage("用户名和密码错误");
         }
 
