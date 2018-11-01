@@ -27,31 +27,35 @@ public class LoginController {
 
     @Resource
     UserDAO userDAO;
+
     /**
      * http://localhost:80/login/index
      * 跳转到登录页面
+     *
      * @return
      */
     @GetMapping("/index")
 
-    public String index(){
+    public String index() {
         return "login";
     }
 
     /**
      * 进行登录操作
-     * @param  request
+     *
+     * @param request
      * @return
      */
-    @PostMapping( value = "/action")
+    @PostMapping(value = "/action")
     @ResponseBody
-    public BaseResponse<String> login( LoginRequest request){
+    public BaseResponse<String> login(@RequestBody LoginRequest request) {
 
         BaseResponse<String> response = new BaseResponse<>();
 
 
-        if(StringUtils.isBlank(request.getUserName())||StringUtils.isBlank(request.getPwd())){
+        if (StringUtils.isBlank(request.getUserName()) || StringUtils.isBlank(request.getPwd())) {
             response.setMessage("用户名和密码错误");
+            return response;
         }
 
         // TODO: 2018/10/15 如果用户米和密码为空,则返回用户名和密码错误
@@ -61,14 +65,14 @@ public class LoginController {
         // BaseUser user = userDAO.selectByName(request.getUserName());可以获取用户信息,
         BaseUser user = userDAO.selectByName(request.getUserName());
 
-              if(user == null|| !StringUtils.equalsIgnoreCase(user.getUserName(),request.getUserName()) || !StringUtils.equalsIgnoreCase(user.getUserPwd(),(request.getPwd()))){
-                  response.setMessage("用户名和密码错误");
+        if (user == null || !StringUtils.equalsIgnoreCase(user.getUserName(), request.getUserName()) || !StringUtils.equalsIgnoreCase(user.getUserPwd(), (request.getPwd()))) {
+            response.setMessage("用户名和密码错误");
+            return response;
         }
 
         // TODO: 2018/10/15 第三步:如果查不到用户信息或者用户输入的密码和数据库中的密码不一致,则返回"用户名和密码错误"
         // request.getPwd()可以获得用户输入的密码user.getUserPwd()可以获得数据库中的密码
         // StringUtils.equalsIgnoreCase("字符串1", "字符串2")可以判断俩个字符串是否相等
         return response;
-                }
-
-                }
+    }
+}

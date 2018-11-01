@@ -23,7 +23,7 @@
 --         参考Dict.xml中的selectByParentKey写SQL
             SELECT <include refid = "BASE_COL"/>FROM
         <include refid = "TABLE_NAME"/>
-        WHERE USER_NAME = #{userName}
+        WHERE USER_NAME = #{userName} LIMIT 1;
     </select>
     <insert id="save" parameterType="com.maqiu.wsc.dal.other.BaseUser">
 --         参考Price.xml中的savePrice写SQL

@@ -16,7 +16,6 @@ import com.maqiu.wsc.dal.dao.UserDAO;
 import com.maqiu.wsc.dal.other.BaseUser;
 
 /**
- *
  * 完成注册功能
  *
  * @author maxiaogang
@@ -31,36 +30,42 @@ public class RegistController {
 
     /**
      * 用户注册页面跳转
+     *
      * @return
      */
     @GetMapping("/index")
-    public String index(){
+    public String index() {
         return "regist";
     }
 
     /**
      * 注册功能
+     *
      * @param request
      * @return
      */
     @PostMapping("/action")
     @ResponseBody
-    public BaseResponse<String> regist(RegistRequest request){
+    public BaseResponse<String> regist(@RequestBody RegistRequest request) {
         BaseResponse<String> response = new BaseResponse<>();
         // TODO: 2018/10/15 实现注册功能
         // TODO: 2018/10/15 第一步:校验用户输入的用户名和密码是否为空
-        if(StringUtils.isBlank(request.getUserName())||StringUtils.isBlank(request.getPwd())||StringUtils.isBlank(request.getUserPhone())){
+        if (response == null || StringUtils.isBlank(request.getUserName()) || StringUtils.isBlank(request.getPwd()) || StringUtils.isBlank(request.getUserPhone())) {
 
             response.setMessage("用户名或密码错误");
+            return response;
         }
-        if(StringUtils.isBlank(request.getUserPhone())){
+
+        if (StringUtils.isBlank(request.getUserPhone())) {
 
             response.setMessage("电话号码错误");
+            return response;
         }
         // TODO: 2018/10/15 如果为空则返回"用户和密码填写错误"
         // TODO: 2018/10/15 第二步:如果不为空,则将用户request转化为BaseUser
         // BaseUser user = new BaseUser()可以创建user对象
         BaseUser user = new BaseUser();
+
         user.setUserName(request.getUserName());
         user.setUserPwd(request.getPwd());
         user.setUserPhone(request.getUserPhone());
