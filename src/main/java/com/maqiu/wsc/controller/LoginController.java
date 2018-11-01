@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import com.maqiu.wsc.dal.other.BaseUser;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +55,7 @@ public class LoginController {
 
 
         if (StringUtils.isBlank(request.getUserName()) || StringUtils.isBlank(request.getPwd())) {
+            response.setCode(HttpStatus.BAD_REQUEST.value());
             response.setMessage("用户名和密码错误");
             return response;
         }
@@ -66,6 +68,7 @@ public class LoginController {
         BaseUser user = userDAO.selectByName(request.getUserName());
 
         if (user == null || !StringUtils.equalsIgnoreCase(user.getUserName(), request.getUserName()) || !StringUtils.equalsIgnoreCase(user.getUserPwd(), (request.getPwd()))) {
+            response.setCode(HttpStatus.BAD_REQUEST.value());
             response.setMessage("用户名和密码错误");
             return response;
         }

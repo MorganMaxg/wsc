@@ -47,7 +47,17 @@
                     success: function (response) {
                         //alert(response.message);
                         //alert("ajax请求成功了");
-                        $("#loginTip").html(response.message)
+                        var code = response.code;
+                        if (code == 200){
+                            $("#loginTip").html(response.message)
+                            $("#loginTip").addClass("alert alert-success");
+                            $("#loginTip").addProp("role", "alert");
+                        } else {
+                            $("#loginTip").html(response.message)
+                            $("#loginTip").addClass("alert alert-danger");
+                            $("#loginTip").addProp("role", "alert");
+                        }
+//                        $("#loginTip").html(response.message)
                     },
                     error: function (response) {
                         alert("ajax请求出错");
