@@ -31,10 +31,17 @@
             //监听了id是loginBtn的元素的点击(cilck)事件;
             //用ajax的话就不需要form表单了
             $("#loginBtn").on("click", function (e) {
+                var loginTip = $("#loginTip");
                 //alert("点击了登录按钮");//弹出一个框
                 //我们看一下效果,看看点击事件有没有生效
                 var userName = $("#userName").val();//这里想要拿到id为userName元素的值;
                 var userPwd = $("#password").val();
+                if (userName == '' || userPwd == '') {
+                    loginTip.html("用户名或密码错误");
+                    loginTip.addClass("alert alert-danger");
+                    loginTip.addProp("role", "alert");
+                    return;
+                }
                 $.ajax({
                     type: "POST",
                     url: "/user/login/action",
@@ -49,13 +56,13 @@
                         //alert("ajax请求成功了");
                         var code = response.code;
                         if (code == 200){
-                            $("#loginTip").html(response.message)
-                            $("#loginTip").addClass("alert alert-success");
-                            $("#loginTip").addProp("role", "alert");
+                            loginTip.html(response.message);
+                            loginTip.addClass("alert alert-success");
+                            loginTip.addProp("role", "alert");
                         } else {
-                            $("#loginTip").html(response.message)
-                            $("#loginTip").addClass("alert alert-danger");
-                            $("#loginTip").addProp("role", "alert");
+                            loginTip.html(response.message);
+                            loginTip.addClass("alert alert-danger");
+                            loginTip.addProp("role", "alert");
                         }
 //                        $("#loginTip").html(response.message)
                     },
