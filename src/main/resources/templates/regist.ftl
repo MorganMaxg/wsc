@@ -7,16 +7,33 @@
 </head>
 <body>
 用户注册页面
-
-<form action="/user/regist/action" method="post">
-    用户名：<input type="text" id="userName" name="userName"/><br/>
-    手机号:<input type="text" id="userPhone" name="userPhone"/><br/>
-    密码：<input type="password" id="password" name="pwd"/>
+<div class="container">
+    <div id="loginTip" class="form-group form-row"></div>
+    <div class="form-group form-row">
+        <div class="col-md-4 mb-2">
+            <label>用户名：</label>
+            <input type="text" name="userName" class="form-control" id="userName" placeholder="请输入用户名" required/>
+        </div>
+    </div>
+    <div class="form-group form-row">
+        <div class="col-md-4 mb-2">
+            <label>手机号码：</label>
+            <input type="text" name="userPhone" class="form-control" id="userPhone" placeholder="请输入手机号码" required/>
+        </div>
+    </div>
+    <div class="form-group form-row">
+        <div class="col-md-4 mb-2">
+            <label>密码：</label>
+            <input type="text" name="password" class="form-control" id="password" placeholder="请输入密码" required/>
+        </div>
+    </div>
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="button" id="registBtn" class="btn btn-primary">注册</button><br/>
-            <div id="registTip" class="form-group form-row"></div>
-        </div><br/>
+            <button type="button" id="registBtn" class="btn btn-primary">注册</button>
+
+        </div>
+    </div>
+
 
         <script>
         $(document).ready(function () {
